@@ -4,7 +4,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const page = () => {
+const Page = () => {
   const [image, setImage] = useState(null)
   const [loding, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -85,4 +85,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

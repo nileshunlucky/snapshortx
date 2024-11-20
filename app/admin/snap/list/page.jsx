@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Settings, Trash } from 'lucide-react';
 
-const page = () => {
+const Page = () => {
 
   const [snaps, setSnaps] = useState([]);
 
@@ -62,4 +62,4 @@ const page = () => {
   );
 }
 
-export default page;
+export default Page;
