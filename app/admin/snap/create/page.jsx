@@ -32,8 +32,12 @@ const Page = () => {
       form.append('category', formData.category)
 
       // Include API secret in the headers
-      const res = await fetch('https://snapshortx.vercel.app/api/snap', {
+      const res = await fetch('/api/snap', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'api_secret': process.env.NEXT_PUBLIC_API_SECRET
+        },
         body: form
       })
 
