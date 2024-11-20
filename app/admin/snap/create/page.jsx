@@ -40,6 +40,8 @@ const Page = () => {
         },
       })
 
+      console.log(process.env.NEXT_PUBLIC_API_SECRET)
+
       if (res.status === 201) {
         alert('Snap created successfully')
         setLoading(false)
