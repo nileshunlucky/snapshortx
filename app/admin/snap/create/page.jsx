@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import React, { useState } from 'react'
-import axios from 'axios'
 
 const Page = () => {
   const [image, setImage] = useState(null)
@@ -33,11 +32,9 @@ const Page = () => {
       form.append('category', formData.category)
 
       // Include API secret in the headers
-      const res = await axios.post('/api/snap', form, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'api-secret': process.env.NEXT_PUBLIC_API_SECRET
-        },
+      const res = await fetch('/api/snap', {
+        method: 'POST',
+        body: form
       })
 
       if (res.status === 201) {
