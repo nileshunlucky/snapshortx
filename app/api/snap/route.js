@@ -18,7 +18,7 @@ export async function POST(req) {
     try {
         // Check if secret key is correct
         const secret = req.nextUrl.searchParams.get('api_secret');
-        if (secret !== process.env.NEXT_PUBLIC_API_SECRET) {
+        if (secret !== process.env.API_SECRET) {
             return NextResponse.json({ error: 'Invalid secret key' }, { status: 401 });
         }
         // Get form data

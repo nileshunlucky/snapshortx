@@ -1,5 +1,6 @@
 'use client'
 
+import axios from 'axios'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -32,13 +33,11 @@ const Page = () => {
       form.append('category', formData.category)
 
       // Include API secret in the headers
-      const res = await fetch('/api/snap', {
-        method: 'POST',
+      const res = await axios.post('/api/snap', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'api_secret': process.env.NEXT_PUBLIC_API_SECRET
-        },
-        body: form
+          'api-secret': process.env.NEXT_PUBLIC_API_SECRET
+        }
       })
 
       if (res.status === 201) {
