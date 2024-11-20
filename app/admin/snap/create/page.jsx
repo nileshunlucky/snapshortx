@@ -31,15 +31,15 @@ const Page = () => {
       form.append('image', image)
       form.append('link', formData.link)
       form.append('category', formData.category)
-  
+
       // Include API secret in the headers
       const res = await axios.post('/api/snap', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'api_secret': process.env.API_SECRET,
+          'api_secret': process.env.NEXT_PUBLIC_API_SECRET,
         },
       })
-  
+
       if (res.status === 201) {
         alert('Snap created successfully')
         setLoading(false)
@@ -50,13 +50,13 @@ const Page = () => {
         })
         setImage(null)
       }
-  
+
       setLoading(false)
     } catch (error) {
       setLoading(false)
       console.log(error)
     }
-  }  
+  }
 
   return (
     <div className='p-5'>

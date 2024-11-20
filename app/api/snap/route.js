@@ -16,11 +16,11 @@ export async function GET(req) {
 export async function POST(req) {
     await connectDB();
 
-    // Validate the API secret
-    const apiSecret = req.headers.get('api_secret');  // Get the api_secret from request headers
-    if (apiSecret !== process.env.API_SECRET) {  // Compare with the secret in environment variables
+    const apiSecret = req.headers.get('api_secret'); // Get api_secret from request header
+    console.log("Received API Secret:", apiSecret);
+    if (apiSecret !== process.env.API_SECRET) {
         return NextResponse.json({ error: 'Invalid API secret' }, { status: 401 });
-    }
+    }    
 
     try {
         // Get form data
