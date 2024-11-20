@@ -51,7 +51,9 @@ const Page = () => {
       }
 
       setLoading(false)
+      alert('Snap creation failed')
     } catch (error) {
+      alert('Snap creation failed')
       setLoading(false)
       console.log(error)
     }
