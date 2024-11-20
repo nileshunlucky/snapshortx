@@ -15,6 +15,13 @@ export async function GET(req) {
 
 export async function POST(req) {
     await connectDB();
+
+    // Validate the API secret
+    const apiSecret = req.headers.get('api_secret');  // Get the api_secret from request headers
+    if (apiSecret !== process.env.API_SECRET) {  // Compare with the secret in environment variables
+        return NextResponse.json({ error: 'Invalid API secret' }, { status: 401 });
+    }
+
     try {
         // Get form data
         const formData = await req.formData();
@@ -66,18 +73,17 @@ export async function POST(req) {
 // DELETE API route
 export async function DELETE(req) {
     const { id } = await req.json();
-  
+
     try {
-      const snap = await Snap.findByIdAndDelete(id);
-  
-      if (!snap) {
-        return NextResponse.json({ error: 'Snap not found' }, { status: 404 });
-      }
-  
-      return NextResponse.json({ success: true }, { status: 200 });
+        const snap = await Snap.findByIdAndDelete(id);
+
+        if (!snap) {
+            return NextResponse.json({ error: 'Snap not found' }, { status: 404 });
+        }
+
+        return NextResponse.json({ success: true }, { status: 200 });
     } catch (error) {
-      console.error(error);
-      return NextResponse.json({ error: 'Failed to delete snap' }, { status: 500 });
+        console.error(error);
+        return NextResponse.json({ error: 'Failed to delete snap' }, { status: 500 });
     }
-  }
-  
+}

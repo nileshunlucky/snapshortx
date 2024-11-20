@@ -31,26 +31,33 @@ const Page = () => {
       form.append('image', image)
       form.append('link', formData.link)
       form.append('category', formData.category)
-
-      const res = await axios.post('/api/snap', form)
-
+  
+      // Include API secret in the headers
+      const res = await axios.post('/api/snap', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'api_secret': process.env.API_SECRET,
+        },
+      })
+  
       if (res.status === 201) {
         alert('Snap created successfully')
         setLoading(false)
         setFormData({
           name: '',
           link: '',
-          category: 'Hoodies'
+          category: 'Hoodies',
         })
         setImage(null)
       }
-
+  
       setLoading(false)
     } catch (error) {
       setLoading(false)
       console.log(error)
     }
-  }
+  }  
+
   return (
     <div className='p-5'>
       <form onSubmit={submitHandler} className='flex flex-col gap-3 md:w-1/3 border border-black p-5 rounded-lg'>
