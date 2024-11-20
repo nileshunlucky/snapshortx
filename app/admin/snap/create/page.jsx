@@ -36,6 +36,7 @@ const Page = () => {
       const res = await axios.post('/api/snap', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'api-secret': process.env.NEXT_PUBLIC_API_SECRET
         },
       })
 
