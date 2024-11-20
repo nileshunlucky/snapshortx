@@ -59,7 +59,7 @@ const Page = () => {
     <div className='p-5'>
       <form onSubmit={submitHandler} className='flex flex-col gap-3 md:w-1/3 border border-black p-5 rounded-lg'>
         <p>Name</p>
-        <input onChange={inputHandler} value={formData.name} name='name' className='p-2 focus:outline-none border border-black' type="text" placeholder='Product Name' />
+        <input onChange={inputHandler} value={formData.name} name='name' className='p-2 focus:outline-none border border-black' type="text" placeholder='Name' />
 
         <p>Image</p>
         <label>
