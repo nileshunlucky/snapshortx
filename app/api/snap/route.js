@@ -17,9 +17,9 @@ export async function POST(req) {
     await connectDB();
     try {
         // Check if secret key is correct
-        const secret = req.nextUrl.searchParams.get('api_secret');
-        if (secret == process.env.API_SECRET) {
-            return NextResponse.json({ error: 'Invalid secret key' }, { status: 401 });
+        const secret = req.headers.get('api-secret');
+        if (secret !== process.env.API_SECRET) {
+            return NextResponse.json({ error: 'Invalid secret key', msg: secret }, { status: 401 });
         }
         // Get form data
         const formData = await req.formData();
