@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import axios from 'axios'
-import toast, { Toaster } from 'react-hot-toast'
 
 const page = () => {
   const [image, setImage] = useState(null)
@@ -36,7 +35,7 @@ const page = () => {
       const res = await axios.post('/api/snap', form)
 
       if (res.status === 201) {
-        toast.success('Snap created successfully')
+        alert('Snap created successfully')
         setLoading(false)
         setFormData({
           name: '',
@@ -48,14 +47,12 @@ const page = () => {
 
       setLoading(false)
     } catch (error) {
-      toast.error('Snap creation failed')
       setLoading(false)
       console.log(error)
     }
   }
   return (
     <div className='p-5'>
-      <Toaster />
       <form onSubmit={submitHandler} className='flex flex-col gap-3 md:w-1/3 border border-black p-5 rounded-lg'>
         <p>Name</p>
         <input onChange={inputHandler} value={formData.name} name='name' className='p-2 focus:outline-none border border-black' type="text" placeholder='Name' />
