@@ -9,7 +9,8 @@ export async function GET(req) {
         const snaps = await Snap.find({});
         return NextResponse.json({ snaps }, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("GET snaps failed:", error);
+        return NextResponse.json({ error: "Failed to fetch snaps" }, { status: 500 });
     }
 }
 
@@ -26,6 +27,12 @@ export async function POST(req) {
         // Validation
         if (!name || !image || !link || !category) {
             return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+        }
+
+        // Use the API secret (if needed for security purposes, e.g., Cloudinary or other services)
+        const apiSecret = process.env.NEXT_SECRET_API_KEY;
+        if (!apiSecret) {
+            return NextResponse.json({ error: 'API secret is missing' }, { status: 500 });
         }
 
         // Convert image to buffer
@@ -58,8 +65,8 @@ export async function POST(req) {
 
         return NextResponse.json({ snap }, { status: 201 });
     } catch (error) {
-        console.log(error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("POST snap creation failed:", error);
+        return NextResponse.json({ error: 'Failed to create snap' }, { status: 500 });
     }
 }
 
@@ -76,7 +83,7 @@ export async function DELETE(req) {
 
         return NextResponse.json({ success: true }, { status: 200 });
     } catch (error) {
-        console.error(error);
+        console.error("DELETE snap failed:", error);
         return NextResponse.json({ error: 'Failed to delete snap' }, { status: 500 });
     }
 }
