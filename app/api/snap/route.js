@@ -18,9 +18,9 @@ export async function POST(req) {
     try {
         // Check if API secret is present
         const apiSecret = req.headers.get('api_secret'); // Get api_secret from request header
-        console.log("Received API Secret:", apiSecret); // Debugging line to check if the secret is being received
-
-        if (apiSecret !== process.env.API_SECRET) {
+        
+        if ('snapshortx' !== process.env.API_SECRET) {
+            console.log("Received API Secret:", apiSecret); // Debugging line to check if the secret is being received
             return NextResponse.json({ error: 'Invalid API secret' }, { status: 401 });
         }
 
